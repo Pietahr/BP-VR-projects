@@ -1,34 +1,46 @@
-import React from 'react';
+import React, {Component} from 'react';
+import PickleRick from './components/PickleRick';
+
 import {
   AppRegistry,
   asset,
   Pano,
   Text,
   View,
+  Box, Model, Cylinder
 } from 'react-vr';
 
-export default class testVR extends React.Component {
+
+class testVR extends Component {
   render() {
     return (
       <View>
         <Pano source={asset('chess-world.jpg')}/>
-        <Text
-          style={{
-            backgroundColor: '#777879',
-            fontSize: 0.8,
-            fontWeight: '400',
-            layoutOrigin: [0.5, 0.5],
-            paddingLeft: 0.2,
-            paddingRight: 0.2,
-            textAlign: 'center',
-            textAlignVertical: 'center',
-            transform: [{translate: [0, 0, -3]}],
-          }}>
-          hello
-        </Text>
+      <PickleRick/>
+      <Box
+        dimWidth={10}
+        dimDepth={1}
+        dimHeight={1}
+        style={{transform: [{translate: [0, 0, -10]}, /*{rotateX : -45}, {rotateY: -45}*/]}}
+      />
+      <Cylinder
+        radiusTop={0.5}
+        radiusBottom={0.5}
+        dimHeight={4}
+        segments={12}
+        style={{transform: [{translate: [2, -2, -10]}, /*{rotateX : -45}, {rotateY: -45}*/]}}
+      />
+            <Cylinder
+        radiusTop={0.5}
+        radiusBottom={0.5}
+        dimHeight={4}
+        segments={12}
+        style={{transform: [{translate: [-3, -2, -10]}, /*{rotateX : -45}, {rotateY: -45}*/]}}
+      />
       </View>
+
     );
   }
-};
+}
 
 AppRegistry.registerComponent('testVR', () => testVR);
