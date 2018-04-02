@@ -19,7 +19,7 @@ class testVR extends Component {
       <View>
         <Pano source={asset('horseshoe-bend.jpg')}/>
         <FixedText message="# objects: "/>
-        <NestedMessage/>
+      {/* <NestedMessage/> */}
         <PickleRick/>
       </View>
     );
