@@ -3,33 +3,25 @@ import {Animated, Model, asset, AnimatedModel, View} from 'react-vr';
 
 import Easing from 'react-native';
 
-const DISTANCE = 8;
+const xDISTANCE = 8;
 
 export default class PickleRick extends Component {
-
-  constructor() {
-      super();
-
-      this.state = { spin: new Animated.Value(0), slide: new Animated.Value(DISTANCE) };
+    
+  constructor(props) {
+      super(props);
+        depth =  this.props.depth;
+      this.state = { spin: new Animated.Value(0), slideX: new Animated.Value(xDISTANCE), slideZ: new Animated.Value(-depth) };
   }
 
   componentDidMount() {
+    depth =  this.props.depth;
     Animated.parallel([
-      this.spinAnimation(),
-        Animated.timing(
-          this.state.slide,
-          {
-           toValue: -DISTANCE,
-           duration: 6000,
-           easing: Easing.ease,
-           delay: 2000
-          }
-        )
+        this.spinAnimation(),
+        this.goRound()
     ]).start();
-
-      //this.spinAnimation();
   }
 
+  // spin object around Y-axis
   spinAnimation() {
       this.state.spin.setValue(0);
       Animated.timing(
@@ -41,6 +33,41 @@ export default class PickleRick extends Component {
           }
       ).start(() => this.spinAnimation());
   }
+
+    goRound() {
+        Animated.sequence([
+            Animated.timing(
+                this.state.slideX,
+                {
+                toValue: -xDISTANCE,
+                duration: 4000,
+                easing: Easing.ease,
+                }
+            ),
+            Animated.timing(
+                this.state.slideZ,
+                {
+                toValue: depth,
+                duration: 4000,
+                easing: Easing.ease
+                }),
+            Animated.timing(
+                this.state.slideX,
+                {
+                toValue: xDISTANCE,
+                duration: 4000,
+                easing: Easing.ease
+                }
+            ),
+            Animated.timing(
+                this.state.slideZ,
+                {
+                toValue: -depth,
+                duration: 4000,
+                easing: Easing.ease
+                })
+        ]).start(() => this.goRound());
+    }
 
     render() {
       const spin = this.state.spin.interpolate({
@@ -55,9 +82,9 @@ export default class PickleRick extends Component {
             <AnimatedModel source={{ obj: asset('pickle_rick.obj') }}
                 style={{
                     transform: [
-                      {translateX: this.state.slide},
-                      {translateY: 0},
-                      {translateZ: -6},
+                      {translateX: this.state.slideX},
+                      {translateY: this.props.height},
+                      {translateZ: this.state.slideZ},
                       { scale: 0.01 },
                       { rotateY: spin}
                   ]

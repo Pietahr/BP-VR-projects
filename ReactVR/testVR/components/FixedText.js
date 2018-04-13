@@ -43,8 +43,7 @@ export default class FixedText extends Component {
               style={{
                 position: 'absolute',
                 layoutOrigin: [0.5, 0.5],
-                borderColor: 'rgb(0, 0, 0)',
-                color: 'rgb(0, 0, 0)',
+                color: '#FFFFFF',
                 transform: [
                   {translate: [1.7, 1, -2]},
                 ]
