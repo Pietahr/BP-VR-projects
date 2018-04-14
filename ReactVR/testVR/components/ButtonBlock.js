@@ -10,9 +10,10 @@ class ButtonBlock extends React.Component {
     return (
         <View 
         style={{ 
-          transform: [{translate: this.props.position}]
+          margin: 0.25
+          //transform: [{translate: this.props.position}]
           }}>
-          <VrButton onClick={this.props.onClick}>
+          <VrButton onClick={this.props.onClick} onLongClick={this.props.onLongClick}>
             <Box
             dimWidth={0.5}
             dimDepth={0.5}

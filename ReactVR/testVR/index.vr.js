@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import PickleRick from './components/PickleRick';
+import Figure from './components/Figure';
 import ButtonBlock from './components/ButtonBlock';
 import FixedText from './components/FixedText';
 import {
@@ -16,7 +16,7 @@ class testVR extends Component {
 
   constructor() {
     super();
-    this.state = { objects: [], i: 0};
+    this.state = { objects: [], i: 0, position: [0,0,0]};
 }
 
 
@@ -25,15 +25,56 @@ class testVR extends Component {
     let count = "# of objects: " + this.state.objects.length;
 
     return (
+      <Scene style={{
+        transform: [
+          {translate: this.state.position}
+        ]
+      }}>
       <View >
-        <Scene>
+
         <Pano source={asset('space.jpg')}/>
-        <ButtonBlock onClick={() => this.generateObject()} color={'#16ae16'} message={'Add Object'} position={[-0.5, 0.85, -3]}/>
-        <ButtonBlock onClick={() => this.clearObjects()} color={'#FF0000'} message={'Clear'} position={[0.5, 1, -3]}/>
+        <View
+        style={{
+          width: 5,
+          flexDirection: 'row',
+          alignItems: 'stretch',
+          justifyContent: 'center',
+          transform: [{ translate: [0, 0.6, -3] }],
+          layoutOrigin: [0.5,0.5] 
+        }}>
+        <ButtonBlock 
+          onClick={() => this.generateFigure('trump','',1, true,1)}
+          onLongClick={() => this.generateFigure('trump','',1, true,10)}
+          color={'purple'} 
+          message={'Trump'}
+        />
+        <ButtonBlock 
+          onClick={() => this.generateFigure('goku','',10, true,1)} 
+          onLongClick={() => this.generateFigure('goku','',10, true,10)} 
+          color={'blue'} 
+          message={'Goku'}/>
+        <ButtonBlock 
+          onClick={() => this.generateFigure('stormtrooper','stormtrooper.png',0.5, true,1)} 
+          onLongClick={() => this.generateFigure('stormtrooper','stormtrooper.png',0.5, true,10)} 
+          color={'green'} 
+          message={'Troop'}/>
+        <ButtonBlock 
+          onClick={() => this.generateFigure('Deer','',1, false,1)} 
+          onLongClick={() => this.generateFigure('Deer','',1, false,10)} 
+          color={'yellow'} 
+          message={'Deer'}/>
+        <ButtonBlock 
+          onClick={() => this.generateFigure('pickle_rick','2.jpg',0.01, false,1)} 
+          onLongClick={() => this.generateFigure('pickle_rick','2.jpg',0.01, false,10)} 
+          color={'orange'} 
+          message={'Rick'}/>
+        <ButtonBlock onClick={() => this.clearObjects()} color={'red'} message={'Clear'}/>
+        </View>
         <FixedText message={count}/>
         {this.state.objects}
-        </Scene>
+
       </View>
+      </Scene>
     );
   }
 
@@ -43,15 +84,27 @@ class testVR extends Component {
     this.setState(newState);
   }
 
-  generateObject(){
+  generateFigure(assetName, textureName, scale, hasMtlFile, nrOfTimes){
     var newState = this.state; 
+    let times = 1;
+    do {
     newState.objects.push(
       // react needs unique key value in array to id objects for optimalisation
       <View key={this.state.i}>
-        <PickleRick key={this.state.i} depth={this.generateRandomNumber(5,20)} height={this.generateRandomNumber(-7,7)}/> 
+        <Figure key={this.state.i} 
+                    z={this.generateRandomNumber(5,20)} 
+                    y={this.generateRandomNumber(-7,7)} 
+                    x={this.generateRandomNumber(4,12)} 
+                    asset={assetName}
+                    texture={textureName}
+                    scale={scale}
+                    mtl={hasMtlFile}/> 
       </View>
     );
+    times = times +1;
     newState.i = this.state.i + 1;
+  } while(times <= nrOfTimes);
+
     this.setState(newState); 
   }
 

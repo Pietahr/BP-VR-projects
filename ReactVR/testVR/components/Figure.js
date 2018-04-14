@@ -5,16 +5,18 @@ import Easing from 'react-native';
 
 const xDISTANCE = 8;
 
-export default class PickleRick extends Component {
+export default class Figure extends Component {
     
   constructor(props) {
       super(props);
-        depth =  this.props.depth;
-      this.state = { spin: new Animated.Value(0), slideX: new Animated.Value(xDISTANCE), slideZ: new Animated.Value(-depth) };
+        depth =  this.props.z;
+        x = this.props.x
+      this.state = { spin: new Animated.Value(0), slideX: new Animated.Value(x), slideZ: new Animated.Value(-depth) };
   }
 
   componentDidMount() {
-    depth =  this.props.depth;
+    depth =  this.props.z;
+    x = this.props.x
     Animated.parallel([
         this.spinAnimation(),
         this.goRound()
@@ -39,7 +41,7 @@ export default class PickleRick extends Component {
             Animated.timing(
                 this.state.slideX,
                 {
-                toValue: -xDISTANCE,
+                toValue: -x,
                 duration: 4000,
                 easing: Easing.ease,
                 }
@@ -54,7 +56,7 @@ export default class PickleRick extends Component {
             Animated.timing(
                 this.state.slideX,
                 {
-                toValue: xDISTANCE,
+                toValue: x,
                 duration: 4000,
                 easing: Easing.ease
                 }
@@ -70,6 +72,19 @@ export default class PickleRick extends Component {
     }
 
     render() {
+
+        // check if a texture file is included.
+        var opts = {};
+        if (this.props.texture.length > 0) {
+            opts['texture'] = asset(this.props.texture)
+        }
+        // check if mtl texture file is included.
+        if(this.props.mtl){
+            opts['source'] = {obj: asset(this.props.asset + '.obj'), mtl:asset(this.props.asset + '.mtl')}
+        } else {
+            opts['source'] = {obj: asset(this.props.asset + '.obj')}
+        }
+
       const spin = this.state.spin.interpolate({
           inputRange: [0, 1],
           outputRange: [0, 360]
@@ -78,18 +93,18 @@ export default class PickleRick extends Component {
       const AnimatedModel = Animated.createAnimatedComponent(Model);
 
         return (
-          <View>
-            <AnimatedModel source={{ obj: asset('pickle_rick.obj') }}
+          <View>    
+            <AnimatedModel 
                 style={{
                     transform: [
                       {translateX: this.state.slideX},
-                      {translateY: this.props.height},
+                      {translateY: this.props.y},
                       {translateZ: this.state.slideZ},
-                      { scale: 0.01 },
+                      { scale: this.props.scale },
                       { rotateY: spin}
                   ]
                 }}
-                texture={asset('2.jpg')}
+                {...opts}
             />
             </View>
         );
