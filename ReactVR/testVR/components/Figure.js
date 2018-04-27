@@ -9,8 +9,9 @@ export default class Figure extends Component {
   constructor(props) {
       super(props);
         depth =  this.props.z;
+        height = this.props.y;
         x = this.props.x
-      this.state = { spin: new Animated.Value(0), slideX: new Animated.Value(x), slideZ: new Animated.Value(-depth) };
+      this.state = { spin: new Animated.Value(0), slideX: new Animated.Value(x), slideY: new Animated.Value(height) };
   }
 
   componentDidMount() {
@@ -46,9 +47,9 @@ export default class Figure extends Component {
                 }
             ),
             Animated.timing(
-                this.state.slideZ,
+                this.state.slideY,
                 {
-                toValue: depth,
+                toValue: -height,
                 duration: 4000,
                 easing: Easing.ease
                 }),
@@ -61,9 +62,9 @@ export default class Figure extends Component {
                 }
             ),
             Animated.timing(
-                this.state.slideZ,
+                this.state.slideY,
                 {
-                toValue: -depth,
+                toValue: height,
                 duration: 4000,
                 easing: Easing.ease
                 })
@@ -97,8 +98,8 @@ export default class Figure extends Component {
                 style={{
                     transform: [
                       {translateX: this.state.slideX},
-                      {translateY: this.props.y},
-                      {translateZ: this.state.slideZ},
+                      {translateY: this.state.slideY},
+                      {translateZ: this.props.z},
                       { scale: this.props.scale },
                       { rotateY: spin}
                   ]

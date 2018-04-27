@@ -21,13 +21,13 @@ export default class Platform extends Component {
                     />
                     <Box
                         dimWidth={0.7}
-                        dimDepth={3}
+                        dimDepth={2}
                         dimHeight={platformHeight}
                         style={{color:'darkgrey',
                                 transform: [{translate: [0, 0, -1.5]}]
                         }}
                     />
-                    <Cylinder
+               {/*}     <Cylinder
                         radiusTop={1.2}
                         dimHeight={platformHeight}
                         segments={32}
@@ -39,7 +39,7 @@ export default class Platform extends Component {
                 }}
 
                     />
-                    
+                                */}
       </View>
     }
 }

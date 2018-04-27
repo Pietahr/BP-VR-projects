@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>BP Scene</title>
+    <meta name="description" content="BP Scene">
+    <script src="https://aframe.io/releases/0.6.0/aframe.min.js"></script>
+    <script src="https://rawgit.com/protyze/aframe-curve-component/master/dist/aframe-curve-component.min.js"></script>
+    <script src="https://rawgit.com/protyze/aframe-alongpath-component/master/dist/aframe-alongpath-component.min.js"></script>
+    <script src="https://rawgit.com/mayognaise/aframe-mouse-cursor-component/master/dist/aframe-mouse-cursor-component.min.js"></script>
+    <!-- Don McCurdy’s aframe-physics-system 
+    <script src="https://unpkg.com/aframe-physics-system@1.4.0/dist/aframe-physics-system.min.js"></script>
+    -->
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <img id="spaceTexture" src="assets/space.jpg" crossorigin="anonymous">
+        <a-asset-item id="trump-obj" src="assets/trump.obj"></a-asset-item>
+        <a-asset-item id="trump-mtl" src="assets/trump.mtl"></a-asset-item>
+        <a-asset-item id="goku-obj" src="assets/goku.obj"></a-asset-item>
+        <a-asset-item id="goku-mtl" src="assets/goku.mtl"></a-asset-item>
+        <a-asset-item id="trooper-obj" src="assets/stormtrooper.obj"></a-asset-item>
+        <a-asset-item id="trooper-mtl" src="assets/stormtrooper.mtl"></a-asset-item>
+        <a-asset-item id="deer-obj" src="assets/deer.obj"></a-asset-item>
+        <a-asset-item id="rick-obj" src="assets/pickle_rick.obj"></a-asset-item>
+        <a-asset-item id="rick-coat" src="assets/2.jpg"></a-asset-item>
+      </a-assets>
+      <a-sky src="#spaceTexture"></a-sky>
+        
+      <a-camera>
+        <a-cursor color="red"></a-cursor>
+        <a-text id='count' color="white" position="0 -0.5 -2" align="center"></a-text>
+      </a-camera>
+
+
+
+      <a-box id='trumpBox' position="-1.5 2 -3" opacity="0.8" color='purple' depth='0.5' height='0.5' width='0.5'>
+        <a-text value="trump" align="center" position="0 0 0.25"></a-text>
+      </a-box>
+      <a-box id='gokuBox' position="-0.75 2 -3" opacity="0.8" color='blue' depth='0.5' height='0.5' width='0.5'>
+          <a-text value="goku" align="center" position="0 0 0.25"></a-text>
+      </a-box>
+      <a-box id='troopBox' position="0 2 -3" opacity="0.8" color='green' depth='0.5' height='0.5' width='0.5'>
+          <a-text value="troop" align="center" position="0 0 0.25"></a-text>
+      </a-box>
+      <a-box id='deerBox' position="0.75 2 -3" opacity="0.8" color='yellow' depth='0.5' height='0.5' width='0.5'>
+          <a-text value="deer" align="center" position="0 0 0.25"></a-text>
+      </a-box>
+      <a-box id='rickBox' position="1.5 2 -3" opacity="0.8" color='orange' depth='0.5' height='0.5' width='0.5'>
+          <a-text value="rick" align="center" position="0 0 0.25"></a-text>
+      </a-box>
+      <a-box id='clearBox' position="2.25 2 -3" opacity="0.8" color='red' depth='0.5' height='0.5' width='0.5'>
+          <a-text value="clear" align="center" position="0 0 0.25"></a-text>
+      </a-box>
+
+    </a-scene>
+  <script type="text/javascript" src="app.js"></script>
+  </body>
+</html>
+
+
+<!--
+      <a-entity trump id="trump" obj-model="obj: #trump-obj; mtl: #trump-mtl" alongpath='curve: #block; dur:16000; loop:true;'>
+        <a-animation attribute="rotation" from="0 0 0" to="0 360 0" dur="1000" easing="linear" repeat="indefinite"></a-animation>
+      </a-entity>
+    -->  
