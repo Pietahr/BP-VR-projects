@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Figure from './components/Figure';
 import ButtonBlock from './components/ButtonBlock';
 import FixedText from './components/FixedText';
+import Platform from './components/Platform';
 import {
   AppRegistry,
   asset,
@@ -19,7 +20,13 @@ class testVR extends Component {
     this.state = { objects: [], i: 0, position: [0,0,0]};
 }
 
-
+  // trump: 1270 faces
+  // goku: 3535 faces
+  // storm trooper: 6518 faces
+  // deer: 38945 faces
+  // pickle rick: 71902 faces
+  // models from https://clara.io/library, https://free3d.com/
+  
   render() {
 
     let count = "# of objects: " + this.state.objects.length;
@@ -39,7 +46,7 @@ class testVR extends Component {
           flexDirection: 'row',
           alignItems: 'stretch',
           justifyContent: 'center',
-          transform: [{ translate: [0, 0.6, -3] }],
+          transform: [{ translate: [0, 1.2, -3] }],
           layoutOrigin: [0.5,0.5] 
         }}>
         <ButtonBlock 
@@ -72,7 +79,7 @@ class testVR extends Component {
         </View>
         <FixedText message={count}/>
         {this.state.objects}
-
+        <Platform/>
       </View>
       </Scene>
     );

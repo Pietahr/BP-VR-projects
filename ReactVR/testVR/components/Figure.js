@@ -3,7 +3,6 @@ import {Animated, Model, asset, AnimatedModel, View} from 'react-vr';
 
 import Easing from 'react-native';
 
-const xDISTANCE = 8;
 
 export default class Figure extends Component {
     

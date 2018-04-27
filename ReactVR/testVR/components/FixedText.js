@@ -45,7 +45,8 @@ export default class FixedText extends Component {
                 layoutOrigin: [0.5, 0.5],
                 color: '#FFFFFF',
                 transform: [
-                  {translate: [1.7, 1, -2]},
+                  //{translate: [1.7, 1, -2]},
+                  {translate: [0, 0, -4]},
                 ]
               }}>
                 {this.props.message}
